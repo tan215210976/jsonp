@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <input type="text" name="p" placeholder="输入商品" id="p">
+    <p id="show"></p>
+    <script src="./jquery.js"></script>
+    <script>
+        //jsonp原生的原理
+        function callback(result) {
+            console.log(result);
+            document.querySelector('#show').innerHTML = result.q;
+            if (document.getElementById('jsonp')) {
+                document.body.removeChild(document.getElementById('jsonp'))
+            }
+
+        }
+        document.querySelector('#p').onblur = function() {
+
+            var script = document.createElement('script');
+            var content = this.value;
+            script.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + content + '&cb=callback';
+            script.id = 'jsonp';
+            document.body.appendChild(script);
+
+        }
+    </script>
+    <!-- <script>
+        function callback(result) {
+            console.log(result);
+            document.querySelector('#show').innerHTML = result.result;
+
+        }
+        document.querySelector('#p').onblur = function() {
+            var script = document.createElement('script');
+            var content = document.querySelector('#p').value;
+            script.src = 'https://suggest.taobao.com/sug?q=' + content + '&callback=callback';
+            document.body.appendChild(script);
+        }
+    </script> -->
+</body>
+
+</html>
